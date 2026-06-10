@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFPB - Painel de Monitoramento Energético</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <header class="bg-green-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                    <img src="https://integra.ifpb.edu.br/img/logos/ifpb/logo-instituto-horizontal-branco.png" alt="Logo IFPB Campus João Pessoa" class="h-10">
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight">SIGE</h1>
+                    <p class="text-xs text-green-200">Sistema Inteligente de Gerenciamento Energético</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 text-sm bg-green-800 px-3 py-1.5 rounded-full">
+                <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                <span>Monitoramento em Tempo Real</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center space-x-4">
+                <div class="p-3 bg-blue-100 text-blue-600 rounded-lg"><i class="fa-solid fa-school text-2xl"></i></div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Salas Monitoradas</p>
+                    <p class="text-2xl font-bold">3</p>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center space-x-4">
+                <div class="p-3 bg-purple-100 text-purple-600 rounded-lg"><i class="fa-solid fa-users text-2xl"></i></div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Salas Ocupadas</p>
+                    <p class="text-2xl font-bold" id="total-ocupadas">1</p>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center space-x-4">
+                <div class="p-3 bg-amber-100 text-amber-600 rounded-lg"><i class="fa-solid fa-snowflake text-2xl"></i></div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Ares Condicionados</p>
+                    <p class="text-2xl font-bold" id="total-ar">2</p>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center space-x-4">
+                <div class="p-3 bg-red-100 text-red-600 rounded-lg"><i class="fa-solid fa-triangle-exclamation text-2xl"></i></div>
+                <div>
+                    <p class="text-sm text-gray-500 font-medium">Alertas Críticos</p>
+                    <p class="text-2xl font-bold text-red-600" id="total-alertas">1</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex flex-wrap gap-2 items-center justify-between border-b border-gray-200 pb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Estado dos Blocos</h2>
+            <div class="flex gap-2">
+                <button class="px-4 py-1.5 bg-green-700 text-white rounded-lg text-sm font-medium shadow">Todos os Blocos</button>
+                <button class="px-4 py-1.5 bg-white text-gray-600 rounded-lg text-sm font-medium border border-gray-300 hover:bg-gray-50">Bloco A</button>
+                <button class="px-4 py-1.5 bg-white text-gray-600 rounded-lg text-sm font-medium border border-gray-300 hover:bg-gray-50">Bloco B</button>
+            </div>
+        </div>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="grid-salas">
+            
+            <div class="bg-white rounded-xl shadow-sm border-t-4 border-emerald-500 p-5 flex flex-col justify-between transition hover:shadow-md">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Bloco B - Info</span>
+                            <h3 class="text-lg font-bold text-gray-800">Sala 101 (Lab Redes)</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                            <i class="fa-solid fa-circle text-[8px] animate-pulse"></i> Em Uso
+                        </span>
+                    </div>
+
+                    <div class="space-y-3 my-4">
+                        <div class="flex items-center justify-between bg-gray-50 p-2 rounded-lg">
+                            <span class="text-sm text-gray-600 flex items-center gap-2"><i class="fa-solid fa-users text-gray-400"></i> Presença</span>
+                            <span class="text-sm font-bold text-emerald-600">Detectada</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-50 p-2 rounded-lg">
+                            <span class="text-sm text-gray-600 flex items-center gap-2"><i class="fa-solid fa-snowflake text-blue-400"></i> Ar Condicionado</span>
+                            <span class="text-sm font-bold text-blue-600">Ligado (22°C)</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-50 p-2 rounded-lg">
+                            <span class="text-sm text-gray-600 flex items-center gap-2"><i class="fa-solid fa-lightbulb text-amber-400"></i> Iluminação</span>
+                            <span class="text-sm font-bold text-amber-600">Ligada</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-gray-100 text-xs text-center text-gray-400 font-medium">
+                    Operação estável.
+                </div>
+            </div>
+
+            <div id="sala-alerta" class="bg-white rounded-xl shadow-sm border-t-4 border-red-500 p-5 flex flex-col justify-between transition hover:shadow-md ring-2 ring-red-100">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Bloco B - Info</span>
+                            <h3 class="text-lg font-bold text-gray-800">Sala 102 (Auditório)</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 flex items-center gap-1">
+                            <i class="fa-solid fa-triangle-exclamation text-xs"></i> Alerta Desperdício
+                        </span>
+                    </div>
+
+                    <div class="space-y-3 my-4">
+                        <div class="flex items-center justify-between bg-gray-50 p-2 rounded-lg">
+                            <span class="text-sm text-gray-600 flex items-center gap-2"><i class="fa-solid fa-user-slash text-gray-400"></i> Presença</span>
+                            <span class="text-sm font-bold text-red-600">Ausente</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-50 p-2 rounded-lg">
+                            <span class="text-sm text-gray-600 flex items-center gap-2"><i class="fa-solid fa-snowflake text-blue-400"></i> Ar Condicionado</span>
+                            <span class="text-sm font-bold text-blue-600">Ligado</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-50 p-2 rounded-lg">
+                            <span class="text-sm text-gray-600 flex items-center gap-2"><i class="fa-solid fa-lightbulb text-amber-400"></i> Iluminação</span>
+                            <span class="text-sm font-bold text-amber-600">Ligada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-gray-100 bg-red-50 -mx-5 -mb-5 p-4 rounded-b-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="text-center sm:text-left">
+                        <p class="text-xs text-red-700 font-bold uppercase tracking-wider">Corte de Energia em:</p>
+                        <p id="timer-display" class="text-xl font-black text-red-600 font-mono tracking-widest">15:00</p>
+                    </div>
+                    <button onclick="desligarManual()" class="w-full sm:w-auto px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded text-xs font-bold transition shadow">
+                        Desligar Agora
+                    </button>
+                </div>
+            </div>
+
+            <div id="sala-desligada" class="bg-gray-50 rounded-xl shadow-sm border-t-4 border-gray-300 p-5 flex flex-col justify-between opacity-75">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Bloco A - Exatas</span>
+                            <h3 class="text-lg font-bold text-gray-500">Sala 103 (Sala Aula)</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-600">
+                            Desconectado
+                        </span>
+                    </div>
+
+                    <div class="space-y-3 my-4">
+                        <div class="flex items-center justify-between bg-white p-2 rounded-lg border border-gray-100">
+                            <span class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-user-slash"></i> Presença</span>
+                            <span class="text-sm font-bold text-gray-400">Ausente</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-white p-2 rounded-lg border border-gray-100">
+                            <span class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-snowflake"></i> Ar Condicionado</span>
+                            <span class="text-sm font-bold text-gray-400">Desligado</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-white p-2 rounded-lg border border-gray-100">
+                            <span class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-lightbulb"></i> Iluminação</span>
+                            <span class="text-sm font-bold text-gray-400">Desligada</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-gray-200 text-xs text-center text-gray-500 font-medium flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-leaf text-green-600"></i> Modo econômico ativo.
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        // Configurações do Timer (15 minutos = 900 segundos)
+        let tempoRestante = 15 * 60; 
+        const timerElement = document.getElementById('timer-display');
+        
+        // Função para atualizar a exibição visual do timer
+        function atualizarTimer() {
+            const minutos = Math.floor(tempoRestante / 60);
+            const segundos = tempoRestante % 60;
+            
+            // Formatação adicionando o 0 na esquerda se for menor que 10
+            const minFormatado = minutos < 10 ? '0' + minutos : minutos;
+            const segFormatado = segundos < 10 ? '0' + segundos : segundos;
+            
+            timerElement.textContent = `${minFormatado}:${segFormatado}`;
+            
+            if (tempoRestante > 0) {
+                tempoRestante--;
+            } else {
+                clearInterval(intervalo);
+                desligarPredioAutomatico();
+            }
+        }
+
+        // Inicia a contagem regressiva de 1 em 1 segundo
+        const intervalo = setInterval(atualizarTimer, 1000);
+
+        // Função simulando o trigger automático de fim de tempo
+        function desligarPredioAutomatico() {
+            alert("Tempo esgotado na Sala 102! Desligando cargas elétricas via relé automação.");
+            aplicarMudancaLayoutDesligado();
+        }
+
+        // Função do clique do botão manual
+        function desligarManual() {
+            if(confirm("Deseja cortar a energia da Sala 102 imediatamente?")) {
+                clearInterval(intervalo);
+                aplicarMudancaLayoutDesligado();
+            }
+        }
+
+        // Altera o estado estético do card quando a energia é cortada
+        function aplicarMudancaLayoutDesligado() {
+            const card = document.getElementById('sala-alerta');
+            card.className = "bg-gray-50 rounded-xl shadow-sm border-t-4 border-gray-300 p-5 flex flex-col justify-between opacity-75";
+            card.innerHTML = `
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Bloco B - Info</span>
+                            <h3 class="text-lg font-bold text-gray-500">Sala 102 (Auditório)</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-600">Desconectado</span>
+                    </div>
+                    <div class="space-y-3 my-4">
+                        <div class="flex items-center justify-between bg-white p-2 rounded-lg"><span class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-user-slash"></i> Presença</span><span class="text-sm font-bold text-gray-400">Ausente</span></div>
+                        <div class="flex items-center justify-between bg-white p-2 rounded-lg"><span class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-snowflake"></i> Ar Condicionado</span><span class="text-sm font-bold text-gray-400">Desligado</span></div>
+                        <div class="flex items-center justify-between bg-white p-2 rounded-lg"><span class="text-sm text-gray-400 flex items-center gap-2"><i class="fa-solid fa-lightbulb"></i> Iluminação</span><span class="text-sm font-bold text-gray-400">Desligada</span></div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-gray-200 text-xs text-center text-green-600 font-medium flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-leaf"></i> Desligado por inatividade (Automação).
+                </div>
+            `;
+            
+            // Atualiza os contadores globais do painel
+            document.getElementById('total-ar').textContent = "1";
+            document.getElementById('total-alertas').textContent = "0";
+        }
+    </script>
+</body>
+</html>
